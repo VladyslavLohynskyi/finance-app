@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import { Wrapper, GlobalStyle } from "./styles";
-import Home from "../Home/index.js";
-import Statistics from "../Statistics/index.js";
-import About from "../About/index.js";
+import Home from "../Home";
+import Statistics from "../Statistics";
+import About from "../About";
 
 const App = () => {
   return (
@@ -27,9 +27,15 @@ const App = () => {
           </nav>
 
           <Routes>
-            <Route path="/about" component={About}></Route>
-            <Route path="/statistics" component={Statistics}></Route>
-            <Route exact path="/" component={Home}></Route>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/statistics">
+              <Statistics />
+            </Route>
+            <Route exact path="/">
+              <Home />
+            </Route>
           </Routes>
         </div>
       </Wrapper>
