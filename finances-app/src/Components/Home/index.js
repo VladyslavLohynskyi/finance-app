@@ -2,6 +2,7 @@ import React from "react";
 import Balance from "../Balance";
 import Transactions from "../Transactions";
 import Form from "../Form";
+import ErrorBoundary from "../ErrorBoundary";
 import { Wrapper } from "./styles";
 let id = 0;
 class Home extends React.Component {
@@ -14,22 +15,24 @@ class Home extends React.Component {
     };
   }
 
-  onChange = (value) => {
+  onChange = ({ balance, date, comment }) => {
     this.setState((state) => ({
-      balance: state.balance + value,
+      balance: state.balance + Number(balance),
       transactions: [
-        { value, label: "change", id: ++id },
+        { value: +balance, date, comment, id: ++id },
         ...state.transactions,
       ],
     }));
   };
   render() {
     return (
-      <Wrapper>
-        <Balance balance={this.state.balance}>Баланс:</Balance>
-        <Form onChange={this.onChange} />
-        <Transactions transactions={this.state.transactions} />
-      </Wrapper>
+      <ErrorBoundary>
+        <Wrapper>
+          <Balance balance={this.state.balance}>Баланс:</Balance>
+          <Form onChange={this.onChange} />
+          <Transactions transactions={this.state.transactions} />
+        </Wrapper>
+      </ErrorBoundary>
     );
   }
 }

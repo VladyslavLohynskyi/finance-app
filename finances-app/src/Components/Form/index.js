@@ -4,28 +4,46 @@ class Form extends React.Component {
   constructor() {
     super();
     this.state = {
-      value: "",
+      balance: "",
+      date: new Date().toISOString().substring(0, 10),
+      comment: "",
     };
   }
   onSubmit = (e) => {
     e.preventDefault();
 
-    this.props.onChange(Number(this.state.value));
-    this.setState({ value: "" });
+    this.props.onChange(this.state);
+    this.setState({
+      balance: "",
+      date: new Date().toISOString().substring(0, 10),
+      comment: "",
+    });
   };
 
   onChange = (e) => {
-    this.setState({ value: e.target.value });
+    const { value, name } = e.target;
+    this.setState({ [name]: name === "balance" ? +value : value });
   };
   render() {
     return (
       <form onSubmit={this.onSubmit}>
         <input
-          value={this.state.value}
+          type="date"
+          name="date"
+          value={this.state.date}
+          onChange={this.onChange}
+        />
+        <input
+          value={this.state.balance}
           name="balance"
           onChange={this.onChange}
           type="number"
           placeholder="Cума"
+        />
+        <textarea
+          name="comment"
+          value={this.state.comment}
+          onChange={this.onChange}
         />
         <button>Зберегти</button>
       </form>

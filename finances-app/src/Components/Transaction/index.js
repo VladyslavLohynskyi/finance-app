@@ -4,8 +4,10 @@ import { Wrapper } from "./styles";
 const Transaction = ({ transaction }) => {
   return (
     <Wrapper value={transaction.value}>
-      Label: {transaction.label}
-      <p>Value: {transaction.value}</p>
+      date: {transaction.date}
+      <p>
+        Value: {transaction.value} {transaction.comment}
+      </p>
     </Wrapper>
   );
 };
