@@ -27,15 +27,9 @@ const App = () => {
           </nav>
 
           <Routes>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/statistics">
-              <Statistics />
-            </Route>
-            <Route exact path="/">
-              <Home />
-            </Route>
+            <Route path="/about" component={About} />
+            <Route path="/statistics" component={Statistics} />
+            <Route exact path="/" component={Home} />
           </Routes>
         </div>
       </Wrapper>
